@@ -1529,7 +1529,7 @@ Widget build(BuildContext context) {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Icon(
                                   
-                                    Icons.volunteer_activism,
+                                    getJournalIcon(journal.type),
                                     size: 100,  
                                   
                                   
@@ -1537,8 +1537,8 @@ Widget build(BuildContext context) {
                                   ),
                               ),
                               const SizedBox(width: 50),
-                              const Text(
-                                "Gratitude",
+                              Text(
+                                journal.type,
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               
@@ -1569,7 +1569,31 @@ Widget build(BuildContext context) {
   );
 }
 }
-  
+IconData getJournalIcon(String type) {
+  switch (type) {
+    case "Goals":
+      return Icons.emoji_events_rounded;
+
+    
+    case "Gratitude":
+      return Icons.volunteer_activism;
+
+    case "5-minute Journal":
+      return Icons.timer;
+
+    case "Reset":
+      return Icons.refresh;
+
+    case "Idea Vault":
+      return Icons.lightbulb;
+
+    case "Blank":
+      return Icons.insert_drive_file;
+
+    default:
+      return Icons.description;
+  }
+}
 class JournalEntry {
   String id;
   String title;
@@ -1600,6 +1624,7 @@ class JournalEntry {
       type: json["type"],
       date: json["date"],
       content: json["content"],
+      
     );
   }
 }
