@@ -190,10 +190,12 @@ class PromptBlock extends BlockEmbed {
 
 class DocumentPage extends StatefulWidget {
  final String type;
+  final JournalEntry? existingJournal;
 
   const DocumentPage({
     super.key,
     required this.type,
+    this.existingJournal,
   });
 
   @override
@@ -213,9 +215,20 @@ void initState() {
 
   // FIRST initialize controller
   
-controller = QuillController.basic();
-  // insert locked prompt block
-  if (type == "Goals") {
+  if (widget.existingJournal != null) {
+    final delta = Delta.fromJson(
+      jsonDecode(widget.existingJournal!.content),
+    );
+
+    controller = QuillController(
+      document: Document.fromDelta(delta),
+      selection: const TextSelection.collapsed(offset: 0),
+    );
+  } else {
+    controller = QuillController.basic();
+
+    // create template here
+     if (type == "Goals") {
     
       controller.document.insert(
     0,
@@ -1317,6 +1330,10 @@ controller = QuillController.basic();
     );
   }
   
+}
+  // insert locked prompt block
+ 
+  
 
   
   
@@ -1356,8 +1373,11 @@ controller = QuillController.basic();
           children: [
 
             // toolbar
-            Row(
+            Wrap(
+              
+              runSpacing: 10,
             children: [
+            
             QuillSimpleToolbar(
               controller: controller,
             ),
@@ -1379,13 +1399,22 @@ controller = QuillController.basic();
                       jsonEncode(controller.document.toDelta().toJson()),
                 );
 
-                journals.add(entry);
+                if (widget.existingJournal == null) {
+                  journals.add(entry);
+                } else {
+                  final index = journals.indexWhere(
+                    (j) => j.id == widget.existingJournal!.id,
+                  );
+
+                  journals[index] = entry;
+                }
 
                 await saveJournals();
 
                 Navigator.pop(context);
               },
             ),
+              
             ]
             ),
 
@@ -1554,7 +1583,7 @@ Widget build(BuildContext context) {
                     context,
                     MaterialPageRoute(
                       builder: (_) => DocumentPage(
-                        // existingJournal: journal,
+                        existingJournal: journal,
                         type: journal.type,
                       ),
                     ),
