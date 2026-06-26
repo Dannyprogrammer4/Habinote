@@ -1355,7 +1355,7 @@ void initState() {
                     
               children: [
                 Text(
-                  "$type ",
+                  widget.type + " ",
                   style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 Text(
@@ -1424,7 +1424,7 @@ void initState() {
 
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: const Color.fromARGB(255, 197, 215, 178),
+                  color: emotion == "good" ? const Color.fromARGB(255, 219, 237, 198) : const Color.fromARGB(255, 229, 216, 221),
                   width: 5,
                 ),
 
@@ -1515,13 +1515,21 @@ Widget build(BuildContext context) {
           },
           calendarStyle: CalendarStyle(
             selectedDecoration: BoxDecoration(
-              color:  emotion == "good" ? const Color.fromARGB(255, 204, 221, 185) : const Color.fromARGB(255, 205, 194, 198),
+              color:  emotion == "good" ? const Color.fromARGB(255, 209, 226, 190) : const Color.fromARGB(255, 216, 205, 209),
               shape: BoxShape.circle,
             ),
 
             todayDecoration: BoxDecoration(
               color:  emotion == "good" ? const Color.fromARGB(255, 219, 237, 198) : const Color.fromARGB(255, 229, 216, 221),
               shape: BoxShape.circle,
+            ),
+            todayTextStyle: const TextStyle(
+              color: Colors.black, // <-- Selected day's text color
+              fontWeight: FontWeight.bold,
+            ),
+            selectedTextStyle: const TextStyle(
+              color: Colors.black, // <-- Selected day's text color
+              fontWeight: FontWeight.bold,
             ),
           ),
 
@@ -1585,6 +1593,7 @@ Widget build(BuildContext context) {
                       builder: (_) => DocumentPage(
                         existingJournal: journal,
                         type: journal.type,
+                       
                       ),
                     ),
                   );
