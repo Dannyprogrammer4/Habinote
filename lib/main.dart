@@ -191,11 +191,13 @@ class PromptBlock extends BlockEmbed {
 class DocumentPage extends StatefulWidget {
  final String type;
   final JournalEntry? existingJournal;
+  final String? date;
 
   const DocumentPage({
     super.key,
     required this.type,
     this.existingJournal,
+    this.date,
   });
 
   @override
@@ -1359,7 +1361,7 @@ void initState() {
                   style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 Text(
-                "$CurrentMonth-$CurrentDay-$CurrentYear",
+                widget.date.toString(),
                 style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ]
@@ -2174,8 +2176,9 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => const DocumentPage(type: "Goals"),
+                    builder: (context) => DocumentPage(type: "Goals", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
                   ),
+                 
                 );
               },
               borderRadius: BorderRadius.circular(15),
@@ -2217,7 +2220,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => const DocumentPage(type: "Gratitude"),
+                    builder: (context) => DocumentPage(type: "Gratitude", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
                   ),
                 );
               },
@@ -2259,7 +2262,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => const DocumentPage(type: "5-minute Journal"),
+                    builder: (context) => DocumentPage(type: "5-minute Journal", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
                   ),
                 );
               },
@@ -2303,7 +2306,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => const DocumentPage(type: "Reset"),
+                    builder: (context) => DocumentPage(type: "Reset", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
                   ),
                 );
               },
@@ -2345,7 +2348,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => const DocumentPage(type: "Idea Vault"),
+                    builder: (context) => DocumentPage(type: "Idea Vault", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
                   ),
                 );
               },
@@ -2387,7 +2390,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => const DocumentPage(type: "Blank"),
+                    builder: (context) => DocumentPage(type: "Blank", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
                   ),
                 );
 
@@ -2432,22 +2435,53 @@ double getCompletion(List<bool> habit) {
           ),
           const SizedBox(height: 10),
           const Text(
-            'Use calendar below to find past journal entries.',
+            'Use calendar below to find past journal entries',
             style: TextStyle(fontSize: 16),
           ),
-          const SizedBox(height: 20), 
-          ElevatedButton.icon(
-            icon: const Icon(Icons.calendar_month),
-            label: const Text("Journal Calendar"),
-            onPressed: () {
-              Navigator.push(
+          const SizedBox(height: 10), 
+          InkWell(
+              onTap: () {
+                Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const JournalCalendarPage(),
                 ),
               );
-            },
-          ), 
+              },
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                width: 310,   
+                height: 145,// 👈 controls size
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: widget.emotion == "good" ? const Color.fromARGB(255, 219, 237, 198) : const Color.fromARGB(255, 229, 216, 221),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                   
+                    
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Icon(
+                        Icons.calendar_month,
+                        size: 100,
+
+                        ),
+                    ),
+                    
+                     const Text(
+                      "  Journal Calendar",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20), 
+         
 
           
         ],
