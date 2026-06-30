@@ -19,6 +19,7 @@ int year = 2026;
 String type = "";
 String emotion = "good";
 
+
 List<JournalEntry> journals = [];
  Future<void> saveJournals() async {
   final prefs = await SharedPreferences.getInstance();
@@ -191,13 +192,13 @@ class PromptBlock extends BlockEmbed {
 class DocumentPage extends StatefulWidget {
  final String type;
   final JournalEntry? existingJournal;
-  final String? date;
+  final String date;
 
   const DocumentPage({
     super.key,
     required this.type,
     this.existingJournal,
-    this.date,
+    required this.date,
   });
 
   @override
@@ -1385,7 +1386,8 @@ void initState() {
             ),
             IconButton(
             icon: const Icon(Icons.save),
-              onPressed: () async {
+              onPressed: (
+              ) async {
                 final entry = JournalEntry(
                   id: DateTime.now()
                       .millisecondsSinceEpoch
@@ -1410,6 +1412,7 @@ void initState() {
 
                   journals[index] = entry;
                 }
+                
 
                 await saveJournals();
 
@@ -1595,6 +1598,7 @@ Widget build(BuildContext context) {
                       builder: (_) => DocumentPage(
                         existingJournal: journal,
                         type: journal.type,
+                        date: journal.date,
                        
                       ),
                     ),
