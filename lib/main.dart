@@ -191,14 +191,16 @@ class PromptBlock extends BlockEmbed {
 
 class DocumentPage extends StatefulWidget {
  final String type;
+ final String date;
   final JournalEntry? existingJournal;
-  final String date;
+  
 
   const DocumentPage({
     super.key,
     required this.type,
-    this.existingJournal,
     required this.date,
+    this.existingJournal,
+    
   });
 
   @override
@@ -1397,8 +1399,7 @@ void initState() {
 
                   type: widget.type,
 
-                  date: DateTime.now().toString(),
-
+                  date: DateTime.now().toIso8601String().split('T')[0],
                   content:
                       jsonEncode(controller.document.toDelta().toJson()),
                 );
@@ -1439,7 +1440,7 @@ void initState() {
               ),
 
               child: QuillEditor.basic(
-                controller: controller,
+                controller: controller,   
                 scrollController: ScrollController(),
                 focusNode: FocusNode(),
                 
@@ -2180,7 +2181,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => DocumentPage(type: "Goals", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
+                    builder: (context) => DocumentPage(type: "Goals", date: DateTime.now().toIso8601String().split('T')[0],),
                   ),
                  
                 );
@@ -2224,7 +2225,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => DocumentPage(type: "Gratitude", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
+                    builder: (context) => DocumentPage(type: "Gratitude", date: DateTime.now().toIso8601String().split('T')[0],),
                   ),
                 );
               },
@@ -2266,7 +2267,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => DocumentPage(type: "5-minute Journal", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
+                    builder: (context) => DocumentPage(type: "5-minute Journal", date: DateTime.now().toIso8601String().split('T')[0],),
                   ),
                 );
               },
@@ -2310,7 +2311,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => DocumentPage(type: "Reset", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
+                    builder: (context) => DocumentPage(type: "Reset", date: DateTime.now().toIso8601String().split('T')[0],),
                   ),
                 );
               },
@@ -2352,7 +2353,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => DocumentPage(type: "Idea Vault", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
+                    builder: (context) => DocumentPage(type: "Idea Vault", date: DateTime.now().toIso8601String().split('T')[0],),
                   ),
                 );
               },
@@ -2394,7 +2395,7 @@ double getCompletion(List<bool> habit) {
                   context,
 
                   MaterialPageRoute(
-                    builder: (context) => DocumentPage(type: "Blank", date: "$CurrentMonth-$CurrentDay-$CurrentYear"),
+                    builder: (context) => DocumentPage(type: "Blank", date: DateTime.now().toIso8601String().split('T')[0],),
                   ),
                 );
 
