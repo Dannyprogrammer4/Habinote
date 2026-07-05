@@ -82,42 +82,43 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    
+  
+
+
     return MaterialApp(
-      title: 'Habinote',
-       localizationsDelegates: const [
-        FlutterQuillLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-       ],
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: emotion == "bad"
-              ? Colors.black
-              : Colors.green,
-        ),
-        appBarTheme: const AppBarTheme(
-          titleTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-            color: Colors.black, // or white depending on your theme
-          ),
-        ),
+  title: 'Habinote',
+
+  themeAnimationDuration: const Duration(seconds: 1),
+  themeAnimationCurve: Curves.easeInOut,
+
+  theme: ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: emotion == "good"
+          ? Colors.green
+          : Colors.black,
+    ),
+
+    appBarTheme: const AppBarTheme(
+      titleTextStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 30,
+        color: Colors.black,
       ),
-      home: MyHomePage(
-        title: 'Habinote',
-        onEmotionChanged: (newEmotion) {
-          setState(() {
-            emotion = newEmotion;
-          });
-          
-        },
-        emotion: emotion,
-      ),
-      
-      
-    );
+    ),
+  ),
+
+  home: MyHomePage(
+    title: 'Habinote',
+    emotion: emotion,
+    onEmotionChanged: (newEmotion) {
+      setState(() {
+        emotion = newEmotion;
+      });
+    },
+  ),
+);
+    
+  
     
   }
   
@@ -1379,8 +1380,9 @@ void initState() {
 
             // toolbar
             Wrap(
-              
-              runSpacing: 10,
+            direction: Axis.vertical,
+            spacing: 1.0,  
+            runSpacing: 2.0,
             children: [
             
             QuillSimpleToolbar(
@@ -2174,6 +2176,7 @@ double getCompletion(List<bool> habit) {
                  runSpacing: 20,  
                 
           children: [
+            
           InkWell(
               onTap: () {
                 type = "Goals";
@@ -2187,7 +2190,8 @@ double getCompletion(List<bool> habit) {
                 );
               },
               borderRadius: BorderRadius.circular(15),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
                 width: 150,   
                 height: 145,// 👈 controls size
                 padding: const EdgeInsets.all(8),
@@ -2230,7 +2234,8 @@ double getCompletion(List<bool> habit) {
                 );
               },
               borderRadius: BorderRadius.circular(15),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
                 width: 150,   
                 height: 145,// 👈 controls size
                 padding: const EdgeInsets.all(8),
@@ -2272,7 +2277,8 @@ double getCompletion(List<bool> habit) {
                 );
               },
               borderRadius: BorderRadius.circular(15),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
                 width: 150,   
                 height: 145,// 👈 controls size
                 padding: const EdgeInsets.all(8),
@@ -2316,7 +2322,8 @@ double getCompletion(List<bool> habit) {
                 );
               },
               borderRadius: BorderRadius.circular(15),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
                 width: 150,   
                 height: 145,// 👈 controls size
                 padding: const EdgeInsets.all(8),
@@ -2358,7 +2365,8 @@ double getCompletion(List<bool> habit) {
                 );
               },
               borderRadius: BorderRadius.circular(15),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
                 width: 150,   
                 height: 145,// 👈 controls size
                 padding: const EdgeInsets.all(8),
@@ -2401,7 +2409,8 @@ double getCompletion(List<bool> habit) {
 
               },
               borderRadius: BorderRadius.circular(15),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
                 width: 150,   
                 height: 145,// 👈 controls size
                 padding: const EdgeInsets.all(8),
@@ -2454,7 +2463,8 @@ double getCompletion(List<bool> habit) {
               );
               },
               borderRadius: BorderRadius.circular(15),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
                 width: 310,   
                 height: 145,// 👈 controls size
                 padding: const EdgeInsets.all(8),
