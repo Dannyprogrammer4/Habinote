@@ -88,6 +88,17 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
   title: 'Habinote',
 
+  localizationsDelegates: const [
+    FlutterQuillLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+
+  supportedLocales: const [
+    Locale('en'),
+  ],
+
   themeAnimationDuration: const Duration(seconds: 1),
   themeAnimationCurve: Curves.easeInOut,
 
@@ -1361,7 +1372,7 @@ void initState() {
                     
               children: [
                 Text(
-                  widget.type + " ",
+                  "${widget.type} ",
                   style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 Text(
@@ -1559,7 +1570,8 @@ Widget build(BuildContext context) {
               return ListTile(
                       title: InkWell(
                         borderRadius: BorderRadius.circular(15),
-                        child: Container(
+                        child: AnimatedContainer(
+                         duration: const Duration(milliseconds: 1000),
                           width: 50,   
                           height: 115,// 👈 controls size
                           padding: const EdgeInsets.all(8),
@@ -1950,7 +1962,7 @@ double getCompletion(List<bool> habit) {
           borderRadius: BorderRadius.circular(15.0),
           
           child: Table(
-            border: TableBorder.all(width: 1, color: Colors.black, borderRadius: BorderRadius.circular(20)),
+            border: TableBorder.all(width: 5, color: widget.emotion == "good" ? const Color.fromARGB(255, 219, 237, 198) : const Color.fromARGB(255, 229, 216, 221), borderRadius: BorderRadius.circular(20)),
             children: [
               TableRow(
                 children: [
@@ -2043,11 +2055,12 @@ double getCompletion(List<bool> habit) {
                 SizedBox(
                   width: 110, // 👈 control width here
                   child: DropdownButtonFormField<String>(
-                    value: dropdownValue,
+                    initialValue: dropdownValue,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
+                        
                       ),
                     ),
                     items: Years.map((year) {
