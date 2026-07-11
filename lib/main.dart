@@ -1853,7 +1853,7 @@ double getCompletion(List<bool> habit) {
         mainAxisSize: MainAxisSize.min, // 🔴 important
         children: [
           Transform.translate(
-            offset: Offset(0, 429),
+            offset: Offset(0, 362),
             child: FloatingActionButton(
             
             onPressed: () async {
@@ -2055,14 +2055,39 @@ double getCompletion(List<bool> habit) {
                 SizedBox(
                   width: 110, // 👈 control width here
                   child: DropdownButtonFormField<String>(
-                    initialValue: dropdownValue,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        
+                      initialValue: dropdownValue,
+
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: widget.emotion == "good" ? const Color.fromARGB(255, 219, 237, 198) : const Color.fromARGB(255, 229, 216, 221),
+                            width: 5,
+                          ),
+                        ),
+
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: widget.emotion == "good" ? const Color.fromARGB(255, 219, 237, 198) : const Color.fromARGB(255, 229, 216, 221),
+                            width: 5,
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: widget.emotion == "good" ? const Color.fromARGB(255, 219, 237, 198) : const Color.fromARGB(255, 229, 216, 221),
+                            width: 5,
+                          ),
+                        ),
                       ),
-                    ),
+                    
                     items: Years.map((year) {
                       return DropdownMenuItem(
                         value: year,
