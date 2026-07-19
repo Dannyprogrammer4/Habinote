@@ -1762,6 +1762,8 @@ class _MyHomePageState extends State<MyHomePage> {
     void initState() {
       super.initState();
         
+      controller = TextEditingController();
+
       dropdownValue = Years.first; 
       currentMonthKey = getMonthKey(DateTime.now());
       
@@ -1989,7 +1991,7 @@ double getCompletion(List<bool> habit) {
                           });
                           saveHabits();
                         },
-                        filledColor: Colors.green,
+                        filledColor:  widget.emotion == "good" ? const Color.fromARGB(255, 195, 211, 175) : const Color.fromARGB(255, 214, 201, 206),
                       );
                     }),
                   ],
