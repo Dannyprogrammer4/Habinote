@@ -2675,7 +2675,7 @@ Widget fancyGauge(double percent, String habit) {
               value: percent * 100,
 
               width: 10,
-              color: Colors.green,
+              color: emotion == "good" ? const Color.fromARGB(255, 195, 211, 175) : const Color.fromARGB(255, 214, 201, 206),
             ),
           ],
           annotations: [
