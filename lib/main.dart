@@ -1798,7 +1798,7 @@ Widget _buildPage() {
     case 1:
       return Habits();
     case 2:
-      return Center(child: Text("Meditation"));
+      return BreathWork();
     case 3:
       return Center(child: Text("Settings"));
     default:
@@ -1840,7 +1840,7 @@ double getCompletion(List<bool> habit) {
           ),
            NavigationDestination(
             icon: Icon(Icons.self_improvement),
-            label: 'Meditation',
+            label: 'Breathwork',
           ),
           NavigationDestination(
             icon: Icon(Icons.settings),
@@ -2162,6 +2162,32 @@ double getCompletion(List<bool> habit) {
   );
   
 }
+Widget BreathWork() {
+    
+      return SingleChildScrollView(
+        child: 
+        Align (
+          alignment: Alignment.centerLeft,
+          child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          
+          child: 
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            const Text(
+              'How stressed are you on a level of 1 through 10?',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+                
+            ],
+          ),
+          ),
+        ),
+      );
+    }
+  
 
   Widget Journal() {
     
@@ -2547,7 +2573,9 @@ double getCompletion(List<bool> habit) {
     
   }
  
-    Future<void> saveHabits() async {
+  
+    
+  Future<void> saveHabits() async {
     final prefs = await SharedPreferences.getInstance();
     final String encoded = jsonEncode(habitHistory);
     await prefs.setString('habitHistory', encoded);
