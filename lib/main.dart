@@ -18,6 +18,9 @@ int CurrentYear = 2026;
 int year = 2026;
 String type = "";
 String emotion = "good";
+double _currentSliderValue = 20;
+  double _currentDiscreteSliderValue = 60;
+ 
 
 
 List<JournalEntry> journals = [];
@@ -1956,7 +1959,22 @@ double getCompletion(List<bool> habit) {
     child: Column (
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      const SizedBox(height: 60),
+      
+      Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              const Text(
+                'Habit Tracker: ',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+      ),
+      const SizedBox(height: 20),
+      
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         
@@ -2175,12 +2193,30 @@ Widget BreathWork() {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+            const SizedBox(height: 20),
             const Text(
-              'How stressed are you on a level of 1 through 10?',
+              'BreathWork',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 15),
+            const Text(
+              'How stressed are you on a level of 1 through 5?',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 20),
-                
+            Slider(
+              // ignore: deprecated_member_use
+              year2023: true,
+              value: _currentDiscreteSliderValue,
+              max: 5,
+              divisions: 5,
+              label: _currentDiscreteSliderValue.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _currentDiscreteSliderValue = value;
+                });
+              },
+            ),    
             ],
           ),
           ),
@@ -2228,7 +2264,7 @@ Widget BreathWork() {
 
           const SizedBox(height: 20),
            const Text(
-            'Daily Entry',
+            'Daily Entry:',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
@@ -2510,7 +2546,7 @@ Widget BreathWork() {
           ),
           const SizedBox(height: 20),
            const Text(
-            'History',
+            'History:',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
