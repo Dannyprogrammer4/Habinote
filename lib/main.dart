@@ -19,7 +19,7 @@ int year = 2026;
 String type = "";
 String emotion = "good";
 double _currentSliderValue = 20;
-  double _currentDiscreteSliderValue = 60;
+  double _currentDiscreteSliderValue = 0;
  
 
 
@@ -2207,10 +2207,13 @@ Widget BreathWork() {
             Slider(
               // ignore: deprecated_member_use
               year2023: true,
+              
               value: _currentDiscreteSliderValue,
               max: 5,
               divisions: 5,
-              label: _currentDiscreteSliderValue.round().toString(),
+              label: stressEmoji(),
+              activeColor: widget.emotion == "good" ? const Color.fromARGB(255, 199, 216, 180) : const Color.fromARGB(255, 194, 183, 187),
+              
               onChanged: (double value) {
                 setState(() {
                   _currentDiscreteSliderValue = value;
@@ -2783,6 +2786,22 @@ Color lighten(Color color, double amount) {
   ];
 
   return months[date.month - 1];
+}
+String stressEmoji() {
+  switch (_currentDiscreteSliderValue.round()) {
+    case 1:
+      return "😌";
+    case 2:
+      return "🙂";
+    case 3:
+      return "😐";
+    case 4:
+      return "😟";
+    case 5:
+      return "😫";
+    default:
+      return "";
+  }
 }
 
   String getMonthKey(DateTime date) {
