@@ -2180,6 +2180,7 @@ double getCompletion(List<bool> habit) {
   );
   
 }
+
 Widget BreathWork() {
     
       return SingleChildScrollView(
@@ -2200,26 +2201,49 @@ Widget BreathWork() {
             ),
             const SizedBox(height: 15),
             const Text(
-              'How stressed are you on a level of 1 through 5?',
+              'How are you doing on a level of 1 through 5?',
               style: TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 20),
-            Slider(
-              // ignore: deprecated_member_use
-              year2023: true,
-              
-              value: _currentDiscreteSliderValue,
-              max: 5,
-              divisions: 5,
-              label: stressEmoji(),
-              activeColor: widget.emotion == "good" ? const Color.fromARGB(255, 199, 216, 180) : const Color.fromARGB(255, 194, 183, 187),
-              
-              onChanged: (double value) {
-                setState(() {
-                  _currentDiscreteSliderValue = value;
-                });
-              },
-            ),    
+            const SizedBox(height: 50),
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
+              children: [
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    showValueIndicator: ShowValueIndicator.never,
+                  ),
+                  child: Slider(
+                    year2023: false,
+                    value: _currentDiscreteSliderValue,
+                    min: 0,
+                    max: 4,
+                    divisions: 4,
+                    activeColor: widget.emotion == "good" ? const Color.fromARGB(255, 199, 216, 180) : const Color.fromARGB(255, 194, 183, 187),
+                    onChanged: (double value) {
+                      setState(() {
+                        _currentDiscreteSliderValue = value;
+                      });
+                    },
+                  ),
+                ),
+
+                Positioned(
+                  bottom: 42,
+
+                  left: ((_currentDiscreteSliderValue) / 4) *
+                      (MediaQuery.of(context).size.width - 162) + 6,
+
+                  child: Text(
+                    stressEmoji(),
+                    style: const TextStyle(
+                      fontSize: 40,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+           
             ],
           ),
           ),
@@ -2789,20 +2813,21 @@ Color lighten(Color color, double amount) {
 }
 String stressEmoji() {
   switch (_currentDiscreteSliderValue.round()) {
-    case 1:
-      return "😌";
-    case 2:
-      return "🙂";
-    case 3:
-      return "😐";
     case 4:
+      return "😁";
+    case 3:
+      return "🙂";
+    case 2:
+      return "😐";
+    case 1:
       return "😟";
-    case 5:
+    case 0:
       return "😫";
     default:
       return "";
   }
 }
+
 
   String getMonthKey(DateTime date) {
   return "${date.year}-${date.month.toString().padLeft(2, '0')}";
