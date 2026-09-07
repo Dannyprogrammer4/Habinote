@@ -2243,9 +2243,38 @@ Widget BreathWork() {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
+            const Text(
+              'Exercises:',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+             const Text(
+              'Here are some exercises based on your stress level',
+              style: TextStyle(fontSize: 16),
+            ),
+           
+            if (_currentDiscreteSliderValue == 4)
+              const Text("You're feeling great! You need to maintain your current state.", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+
+            if (_currentDiscreteSliderValue == 3)
+              const Text("You seem to be doing good! You need to maintain and energize.", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+
+             if (_currentDiscreteSliderValue == 2)
+              const Text("You seem to be doing alright. You need to relax and focus.", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+              
+            if (_currentDiscreteSliderValue == 1)
+              const Text("You seem quite stressed. You need to calm down.", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+
+             if (_currentDiscreteSliderValue == 0)
+              const Text("You seem very stressed. You need to calm down and reset.", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+              
+          
            
             ],
+            
           ),
+          
           ),
         ),
       );
